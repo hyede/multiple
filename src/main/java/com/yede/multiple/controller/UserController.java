@@ -19,7 +19,7 @@ public class UserController {
     //获取指定考试安排 指定学生的考试记录
     @RequestMapping(value="", method= RequestMethod.GET)
     public List<User> selectAll() {
-        DatabaseContextHolder.setDataSourceKey("witwin");
+        DatabaseContextHolder.setDataSourceKey("hzwitwin");
         return userInfoMapper.selectAll();
     }
 }
