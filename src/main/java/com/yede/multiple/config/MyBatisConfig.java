@@ -1,4 +1,4 @@
-package com.yede.multiple;
+package com.yede.multiple.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.yede.multiple.utils.DynamicDataSource;
@@ -8,8 +8,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -32,7 +30,7 @@ import java.sql.SQLException;
  * 2）创建SqlSessionFactory 3）配置事务管理器，除非需要使用事务，否则不用配置
  */
 @Configuration // 该注解类似于spring配置文件
-@MapperScan(basePackages = "com.yede.multiple.mapper")
+@MapperScan(basePackages = "com.yede.multiple.*.dao")
 public class MyBatisConfig   {
 
     @Autowired
@@ -93,7 +91,7 @@ public class MyBatisConfig   {
 
 
     private String getUrl(String schema) {
-        String url = dbConfig.getDb() + "/" + schema + "?useUnicode=" + dbConfig.isUseUnicode() + "&characterEncoding=" + dbConfig.getEncoding();
+        String url = dbConfig.getDb() + "/" + schema + "?useUnicode=" + dbConfig.isUseUnicode() + "&characterEncoding=" + dbConfig.getEncoding()+"&allowMultiQueries=true";
         return url;
     }
 

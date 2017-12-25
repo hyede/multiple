@@ -25,7 +25,7 @@ public class HttpInterceptor  implements HandlerInterceptor {
         request.setAttribute(START_TIME, start);
          String code= (String)request.getAttribute("code");
          if (code==null){
-             code="witwin";
+             code="test2";
          }
         DatabaseContextHolder.setDataSourceKey(code);
         return true;

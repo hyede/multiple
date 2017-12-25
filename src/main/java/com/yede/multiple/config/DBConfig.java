@@ -1,4 +1,4 @@
-package com.yede.multiple;
+package com.yede.multiple.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
