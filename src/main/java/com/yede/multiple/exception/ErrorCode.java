@@ -1,7 +1,8 @@
 package com.yede.multiple.exception;
 
 public enum ErrorCode {
-    sys_error("system error");
+    sys_error("system error"),
+    token_expired("token_expired");
 
     private String errorMessage;
 
