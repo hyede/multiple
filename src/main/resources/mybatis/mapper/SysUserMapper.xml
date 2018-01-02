@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yede.multiple.user.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.yede.multiple.user.entity.SysUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, username, telephone, mail, password, dept_id, status, remark, operator, operate_time, 
+    operate_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from sys_user
+    where id = #{id}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.yede.multiple.user.entity.SysUser" >
+    insert into sys_user (id, username, telephone, 
+      mail, password, dept_id, 
+      status, remark, operator, 
+      operate_time, operate_ip)
+    values (#{id}, #{username}, #{telephone},
+      #{mail}, #{password}, #{deptId},
+      #{status}, #{remark}, #{operator},
+      #{operateTime}, #{operateIp})
+  </insert>
+
+
+
+  <insert id="insertSelective"  parameterType="com.yede.multiple.user.entity.SysUser" keyProperty="id" useGeneratedKeys="true">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="username != null" >
+        #{username},
+      </if>
+      <if test="telephone != null" >
+        #{telephone},
+      </if>
+      <if test="mail != null" >
+        #{mail},
+      </if>
+      <if test="password != null" >
+        #{password},
+      </if>
+      <if test="deptId != null" >
+        #{deptId},
+      </if>
+      <if test="status != null" >
+        #{status},
+      </if>
+      <if test="remark != null" >
+        #{remark},
+      </if>
+      <if test="operator != null" >
+        #{operator},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.yede.multiple.user.entity.SysUser" >
+    update sys_user
+    <set >
+      <if test="username != null" >
+        username = #{username},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail},
+      </if>
+      <if test="password != null" >
+        password = #{password},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId},
+      </if>
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.yede.multiple.user.entity.SysUser">
+    update sys_user
+    set username = #{username},
+      telephone = #{telephone},
+      mail = #{mail},
+      password = #{password},
+      dept_id = #{deptId},
+      status = #{status},
+      remark = #{remark},
+      operator = #{operator},
+      operate_time = #{operateTime},
+      operate_ip = #{operateIp}
+    where id = #{id}
+  </update>
+
+  <select id="findByKeyword" parameterType="string" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE telephone = #{keyword}
+    OR mail = #{keyword}
+  </select>
+
+  <select id="findByName" parameterType="string" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE username = #{username}
+  </select>
+
+  <select id="countByMail" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM sys_user
+    WHERE mail = #{mail}
+    <if test="id != null">
+      AND id != #{id}
+    </if>
+  </select>
+
+  <select id="countByTelephone" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM sys_user
+    WHERE telephone = #{telephone}
+    <if test="id != null">
+      AND id != #{id}
+    </if>
+  </select>
+
+  <select id="countByDeptId" parameterType="int" resultType="int">
+    SELECT count(1)
+    FROM sys_user
+    WHERE dept_id = #{deptId}
+  </select>
+
+  <select id="getPageByDeptId" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE dept_id = #{deptId}
+    ORDER BY username ${page.order}
+    LIMIT #{page.pageStart}, #{page.pageSize}
+  </select>
+
+  <select id="getByIdList" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+  </select>
+
+</mapper>

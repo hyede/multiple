@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -40,6 +41,12 @@ public class SysDeptController extends BaseController {
     public ResponseVO getSysDeptById(@PathVariable Long sysDeptById) throws ApplicationException {
        SysDept sysDept= sysDeptService.getById(sysDeptById);
         return this.successResponse(sysDept);
+    }
+
+    @RequestMapping("/delete.json")
+    public ResponseVO delete(@RequestParam("id") Long id)  throws ApplicationException {
+        sysDeptService.delete(id);
+        return this.successResponse();
     }
 
     @RequestMapping(value = "/sysDeptTree",method = RequestMethod.GET)

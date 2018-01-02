@@ -1,25 +1,26 @@
-package com.yede.multiple.department.entity;
+package com.yede.multiple.aclModule.entity;
 
-import com.yede.multiple.model.GenericObject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
+
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class SysDept extends GenericObject {
-    private Long id;
+@AllArgsConstructor
+public class SysAclModule {
+    private Integer id;
 
     private String name;
 
-    private Long parentId;
+    private Integer parentId;
 
     private String level;
 
     private Integer seq;
+
+    private Integer status;
 
     private String remark;
 
@@ -29,11 +30,11 @@ public class SysDept extends GenericObject {
 
     private String operateIp;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,11 +46,11 @@ public class SysDept extends GenericObject {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
@@ -67,6 +68,14 @@ public class SysDept extends GenericObject {
 
     public void setSeq(Integer seq) {
         this.seq = seq;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getRemark() {

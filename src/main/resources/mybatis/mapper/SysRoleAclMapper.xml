@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yede.multiple.role.dao.SysRoleAclMapper" >
+  <resultMap id="BaseResultMap" type="com.yede.multiple.role.entity.SysRoleAcl" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="acl_id" property="aclId" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, role_id, acl_id, operator, operate_time, operate_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_acl
+    where id = #{id}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from sys_role_acl
+    where id = #{id}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.yede.multiple.role.entity.SysRoleAcl" >
+    insert into sys_role_acl (id, role_id, acl_id, 
+      operator, operate_time, operate_ip
+      )
+    values (#{id}, #{roleId}, #{aclId},
+      #{operator}, #{operateTime}, #{operateIp}
+      )
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.yede.multiple.role.entity.SysRoleAcl" >
+    insert into sys_role_acl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="aclId != null" >
+        acl_id,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="roleId != null" >
+        #{roleId},
+      </if>
+      <if test="aclId != null" >
+        #{aclId},
+      </if>
+      <if test="operator != null" >
+        #{operator},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp},
+      </if>
+    </trim>
+  </insert>
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.yede.multiple.role.entity.SysRoleAcl" >
+    update sys_role_acl
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId},
+      </if>
+      <if test="aclId != null" >
+        acl_id = #{aclId},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yede.multiple.role.entity.SysRoleAcl" >
+    update sys_role_acl
+    set role_id = #{roleId},
+      acl_id = #{aclId},
+      operator = #{operator},
+      operate_time = #{operateTime},
+      operate_ip = #{operateIp}
+    where id = #{id}
+  </update>
+
+  <select id="getAclIdListByRoleIdList" parameterType="map" resultType="int">
+    SELECT acl_id
+    FROM sys_role_acl
+    WHERE role_id in
+      <foreach collection="roleIdList" item="roleId" open="(" close=")" separator=",">
+        #{roleId}
+      </foreach>
+  </select>
+
+  <delete id="deleteByRoleId" parameterType="int">
+    DELETE FROM sys_role_acl
+    WHERE role_id = #{roleId}
+  </delete>
+
+  <insert id="batchInsert" parameterType="map">
+    insert into sys_role_acl (role_id, acl_id, operator, operate_time, operate_ip)
+    values
+      <foreach collection="roleAclList" item="roleAcl" separator=",">
+      (#{roleAcl.roleId}, #{roleAcl.aclId}, #{roleAcl.operator}, #{roleAcl.operateTime}, #{roleAcl.operateIp})
+      </foreach>
+  </insert>
+
+  <select id="getRoleIdListByAclId" parameterType="int" resultType="int">
+    SELECT role_id
+    FROM sys_role_acl
+    WHERE acl_id = #{aclId}
+  </select>
+
+</mapper>

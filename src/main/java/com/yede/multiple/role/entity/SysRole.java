@@ -1,25 +1,22 @@
-package com.yede.multiple.department.entity;
+package com.yede.multiple.role.entity;
 
-import com.yede.multiple.model.GenericObject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
+
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class SysDept extends GenericObject {
-    private Long id;
+@AllArgsConstructor
+public class SysRole {
+    private Integer id;
 
     private String name;
 
-    private Long parentId;
+    private Integer type;
 
-    private String level;
-
-    private Integer seq;
+    private Integer status;
 
     private String remark;
 
@@ -29,11 +26,11 @@ public class SysDept extends GenericObject {
 
     private String operateIp;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -45,28 +42,20 @@ public class SysDept extends GenericObject {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Integer getType() {
+        return type;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
-    public String getLevel() {
-        return level;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
-    }
-
-    public Integer getSeq() {
-        return seq;
-    }
-
-    public void setSeq(Integer seq) {
-        this.seq = seq;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getRemark() {

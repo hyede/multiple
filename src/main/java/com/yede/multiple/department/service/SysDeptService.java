@@ -10,6 +10,7 @@ import com.yede.multiple.department.entity.SysDept;
 import com.yede.multiple.department.entity.bean.DeptParam;
 import com.yede.multiple.department.utils.LevelUtil;
 import com.yede.multiple.exception.ApplicationException;
+import com.yede.multiple.user.dao.SysUserMapper;
 import com.yede.multiple.utils.BeanValidator;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ import java.util.List;
 public class SysDeptService {
     @Autowired
     private SysDeptMapper sysDeptMapper;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     public void save(DeptParam param) throws ApplicationException {
         BeanValidator.check(param);
@@ -97,6 +101,18 @@ public class SysDeptService {
             return null;
         }
         return dept.getLevel();
+    }
+
+    public void delete(Long deptId) throws ApplicationException{
+        SysDept dept = sysDeptMapper.selectByPrimaryKey(deptId);
+        Preconditions.checkNotNull(dept, "待删除的部门不存在，无法删除");
+        if (sysDeptMapper.countByParentId(dept.getId()) > 0) {
+            throw new ApplicationException("当前部门下面有子部门，无法删除");
+        }
+        if(sysUserMapper.countByDeptId(Integer.valueOf(dept.getId().toString())) > 0) {
+            throw new ApplicationException("当前部门下面有用户，无法删除");
+        }
+        sysDeptMapper.deleteByPrimaryKey(deptId);
     }
 
 
