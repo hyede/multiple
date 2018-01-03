@@ -8,9 +8,7 @@ import com.yede.multiple.model.UserDetailsBean;
 import com.yede.multiple.role.dao.SysRoleAclMapper;
 import com.yede.multiple.role.dao.SysRoleUserMapper;
 import com.yede.multiple.utils.AppSec;
-import com.yede.multiple.utils.JsonMapper;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

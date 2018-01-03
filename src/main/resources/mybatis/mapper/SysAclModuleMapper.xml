@@ -32,7 +32,7 @@
   </delete>
 
 
-  <insert id="insert" parameterType="com.yede.multiple.aclModule.model.SysAclModule" >
+  <insert id="insert" parameterType="com.yede.multiple.aclModule.entity.SysAclModule" >
     insert into sys_acl_module (id, name, parent_id, 
       level, seq, status, 
       remark, operator, operate_time, 
@@ -42,7 +42,7 @@
       #{remark}, #{operator}, #{operateTime},
       #{operateIp})
   </insert>
-  <insert id="insertSelective" parameterType="com.yede.multiple.aclModule.model.SysAclModule" keyProperty="id" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.yede.multiple.aclModule.entity.SysAclModule" keyProperty="id" useGeneratedKeys="true">
     insert into sys_acl_module
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -110,7 +110,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yede.multiple.aclModule.model.SysAclModule" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.yede.multiple.aclModule.entity.SysAclModule" >
     update sys_acl_module
     <set >
       <if test="name != null" >
@@ -143,7 +143,7 @@
     </set>
     where id = #{id}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yede.multiple.aclModule.model.SysAclModule">
+  <update id="updateByPrimaryKey" parameterType="com.yede.multiple.aclModule.entity.SysAclModule">
     update sys_acl_module
     set name = #{name},
       parent_id = #{parentId},

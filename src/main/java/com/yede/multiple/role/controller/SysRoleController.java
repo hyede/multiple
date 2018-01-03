@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/sysRole")
 public class SysRoleController extends BaseController {
 
     @Resource
